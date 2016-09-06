@@ -7,15 +7,13 @@
 
 #include "Headers/GLApplication.h"
 
-
-
 // Shaders
 const GLchar* vertexShaderSource = "#version 330 core\n"
 "layout (location = 0) in vec3 position;\n"
-"layout (location = 1) in uniform GLfloat offset;\n"
+
 		"void main()\n"
 		"{\n"
-		"gl_Position = vec4(position.x + offset, position.y, position.z, 1.0);\n"
+		"gl_Position = vec4(position.x , position.y, position.z, 1.0);\n"
 		"}\0";
 const GLchar* fragmentShaderSource = "#version 330 core\n"
 		"out vec4 color;\n"
@@ -71,7 +69,6 @@ void GLApplication::initialize() {
 	// Position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat),
 			(GLvoid*) 0);
-	
 	glEnableVertexAttribArray(0);
 
 	glBindVertexArray(0); // Unbind VAO
@@ -89,12 +86,14 @@ void GLApplication::applicationLoop() {
 
 		// Update the uniform color
 		GLfloat timeValue = TimeManager::Instance().GetTime() - lastTime;
-		//GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-		GLfloat offset = 0.0f;
-		offset = offset + timeValue;
-		GLint vertexColorLocation = shader.getUniformLocation("offset");
-		std::cout << offset;
-		glUniform4f(vertexColorLocation, 0.0f, offset, 0.0f, 1.0f);
+		GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
+		GLint vertexColorLocation = shader.getUniformLocation("ourColor");
+		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+		//Offset como uniform
+		GLfloat var_offset = 0.5f;
+		GLint vertexOffsetLocation = shader.getUniformLocation("offset");
+		glUniform1f(vertexOffsetLocation,var_offset);
 
 		// Draw the triangle
 		glBindVertexArray(VAO);
