@@ -40,6 +40,7 @@
     <ProjectGuid>{967827AF-5E27-410C-90C1-56232D0D0169}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Practica2_Ej3</RootNamespace>
+    <ProjectName>Practica2</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

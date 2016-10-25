@@ -25,7 +25,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prac1_TPS", "Prac1_TPS\Prac
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Prac1_Orbital", "Prac1_Orbital\Prac1_Orbital.vcxproj", "{7221EA83-5D29-4ED1-98E3-F0D00DB46AA4}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica2_Ej3", "Practica2_Ej3\Practica2_Ej3.vcxproj", "{967827AF-5E27-410C-90C1-56232D0D0169}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Practica2", "Practica2_Ej3\Practica2_Ej3.vcxproj", "{967827AF-5E27-410C-90C1-56232D0D0169}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Proyecto", "Proyecto\Proyecto.vcxproj", "{DB82BFD4-983F-4F6C-BE52-8CB0AEA80F31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{967827AF-5E27-410C-90C1-56232D0D0169}.Debug|Win32.Build.0 = Debug|Win32
 		{967827AF-5E27-410C-90C1-56232D0D0169}.Release|Win32.ActiveCfg = Release|Win32
 		{967827AF-5E27-410C-90C1-56232D0D0169}.Release|Win32.Build.0 = Release|Win32
+		{DB82BFD4-983F-4F6C-BE52-8CB0AEA80F31}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB82BFD4-983F-4F6C-BE52-8CB0AEA80F31}.Debug|Win32.Build.0 = Debug|Win32
+		{DB82BFD4-983F-4F6C-BE52-8CB0AEA80F31}.Release|Win32.ActiveCfg = Release|Win32
+		{DB82BFD4-983F-4F6C-BE52-8CB0AEA80F31}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
