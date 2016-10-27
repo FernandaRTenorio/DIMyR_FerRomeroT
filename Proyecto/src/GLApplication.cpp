@@ -412,16 +412,16 @@ void GLApplication::applicationLoop() {
 				texCroc.bind(GL_TEXTURE0);
 				objModel2.render(&shader3);
 
-				model2 = glm::translate(model2,
-					glm::vec3(sbb2.center.x, sbb2.center.y, sbb2.center.z));
+				model2 = glm::translate(model2, aabb2.center);
+					//glm::vec3(sbb2.center.x, sbb2.center.y, sbb2.center.z));
 				
-				model2 = glm::scale(model2,
-					glm::vec3(sbb2.ratio,sbb2.ratio,sbb2.ratio));
+				model2 = glm::scale(model2, glm::vec3(5.0f,5.0f,5.0f));
+					//glm::vec3(sbb2.ratio,sbb2.ratio,sbb2.ratio));
 				//aabb2.dist, aabb2.dist, aabb2.dist
 				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-				sphere.render();
-				//cubo.loadCube(aabb2);
-				//cubo.renderCube();
+				//sphere.render();
+				cubo.loadCube(aabb2);
+				cubo.renderCube();
 			}
 			else if (i == 2){
 				textrex.bind(GL_TEXTURE0);
@@ -458,6 +458,20 @@ void GLApplication::applicationLoop() {
 					glm::vec3(sbb5.ratio, sbb5.ratio, sbb5.ratio));
 				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
 				sphere.render();
+			}
+			SBB s1, s2;
+			s1.center = glm::vec3(model2* glm::vec4(0, 0, 0, 1));
+			s1.ratio = sbb.ratio *0.2f;
+			s2.center = glm::vec3(model2*glm::vec4(0, 0, 0, 1));
+			s2.ratio = sbb2.ratio * 0.01f;
+			bool colision = false;
+			colision = SBBvsSBB(s1, s2);
+
+			if (colision){
+				windowManager->inputManager.setCharacterPosition(colision);
+				std::cout << "colision!!:" << colision << std::endl;
+				colision = false;
+
 			}
 		}
 		

@@ -3,6 +3,7 @@
 #include "Headers/InputManager.h"
 #include "Headers/TimeManager.h"
 
+
 InputCodes InputManager::toApplicationKey(int key) {
 	switch (key) {
 	case 256:
@@ -93,9 +94,13 @@ void InputManager::mouseScroll(float yoffset) {
 
 void InputManager::do_movement(float deltaTime) {
 
+	
+
+
 	/*Controles de la camara*/
 	float cameraSpeed = 50.0f * deltaTime;
-	glm::vec3 camera_look_at = glm::vec3(0, 0, 0);
+	glm::vec3 camera_look_at = glm::vec3(0.0f, 1.0f, 0.0f);
+		//glm::vec3(CharacterPosition.x, CharacterPosition.y, CharacterPosition.z);
 
 	// Calculate zoom
 	float zoomLevel = scrollYoffset * cameraSpeed;
@@ -132,29 +137,42 @@ void InputManager::do_movement(float deltaTime) {
 	//std::cout << "cameraSpeed:" << cameraSpeed << std::endl;
 	if (keyState[InputCodes::W] || keyState[InputCodes::w]
 		|| keyState[InputCodes::Up]){
-		CharacterPosition.z += cameraSpeed * cos(CharacterRotation);
-		CharacterPosition.x += cameraSpeed * sin(CharacterRotation);
+		if (colision2){
+			CharacterPosition = CharacterPosition;
+		}
+		else{
+			CharacterPosition.z += cameraSpeed * cos(CharacterRotation);
+			CharacterPosition.x += cameraSpeed * sin(CharacterRotation);
+		}
+		//CharacterRotation += cameraSpeed * sin(CharacterRotation);
+		//CharacterRotation += cameraSpeed * cos(CharacterRotation);
 		//cameraPos.x = CharacterPosition.x;
 		//cameraPos.y = CharacterPosition.y;
 		//cameraPos.z = CharacterPosition.z;
 	}
 		//cameraPos += cameraSpeed * cameraFront;
 	if (keyState[InputCodes::S] || keyState[InputCodes::s]
-		|| keyState[InputCodes::Down])
+		|| keyState[InputCodes::Down]){
 		//cameraPos -= cameraSpeed * cameraFront;
-		CharacterPosition.z -= cameraSpeed * cos(CharacterRotation);
-		CharacterPosition.x -= cameraSpeed * sin(CharacterRotation);
+		if (colision2){
+			CharacterPosition = CharacterPosition;
+		}
+		else{
+			CharacterPosition.z -= cameraSpeed * cos(CharacterRotation);
+			CharacterPosition.x -= cameraSpeed * sin(CharacterRotation);
+		}
 		//cameraPos.x = CharacterPosition.x;
 		//cameraPos.y = CharacterPosition.y;
 		//cameraPos.z = CharacterPosition.z;
+	}
 	if (keyState[InputCodes::A] || keyState[InputCodes::a]
 		|| keyState[InputCodes::Left])
 		/*cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp))
 		* cameraSpeed;*/
 		
-		CharacterRotation += deltaTime *cameraSpeed;
+		CharacterRotation += deltaTime * cameraSpeed;
 		//distanceFromPlayer * glm::cos(glm::radians(pitch));
-		//pitch -= deltay * cameraSpeed;
+		//angleAroundPlayer += CharacterRotation;
 	if (keyState[InputCodes::D] || keyState[InputCodes::d]
 		|| keyState[InputCodes::Right])
 		/*cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp))

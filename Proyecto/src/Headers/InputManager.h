@@ -143,6 +143,11 @@ public:
 		return CharacterPosition;
 	}
 
+	glm::vec3 setCharacterPosition(bool colision){
+		CharacterPosition = CharacterPosition;
+		colision2 = colision;
+		return CharacterPosition;
+	}
 	float getCharacterRotation(){
 		return CharacterRotation;
 	}
@@ -168,6 +173,7 @@ protected:
 
 	glm::vec3 CharacterPosition;
 	float CharacterRotation;
+	bool colision2;
 	
 };
 

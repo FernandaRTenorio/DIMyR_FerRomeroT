@@ -56,11 +56,11 @@ SBB getSBB(std::vector<Mesh> meshes) {
 	return sbb;
 }
 
-bool OBBvsOBB(SBB sbb1, SBB sbb2) {
+bool SBBvsSBB(SBB sbb1, SBB sbb2) {
 	float d = glm::distance(sbb1.center, sbb2.center);
 	if (d <= (sbb1.ratio + sbb2.ratio))
-		return true;
-	return false;
+		return false;
+	return true;
 }
 
 bool AABBvsAABB(AABB aabb1, AABB aabb2) {
@@ -73,7 +73,7 @@ bool AABBvsAABB(AABB aabb1, AABB aabb2) {
 		return false;
 }
 
-bool AABBvsOBB(AABB aabb1, SBB sbb1) {
+bool AABBvsSBB(AABB aabb1, SBB sbb1) {
 
 	bool center;
 	float s, d;
