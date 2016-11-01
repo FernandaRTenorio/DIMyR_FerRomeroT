@@ -87,10 +87,10 @@ void GLApplication::initialize() {
 
 	//Dibujando el plano Horizontal
 	VertexColorTexture vertices[4] = {
-		{ glm::vec3(-1.8f, 0.0f, 0.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(0.0f,0.0f) },//0
-		{ glm::vec3(1.8f, 0.0f, 0.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(1.0f, 0.0f) }, //1
-		{ glm::vec3(1.8f, 0.0f, -0.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(1.0f, 1.0f) },
-		{ glm::vec3(-1.8f, 0.0f, -0.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(0.0f, 1.0f) }
+		{ glm::vec3(-10.8f, -2.0f, 10.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(0.0f,0.0f) },//0
+		{ glm::vec3(10.8f, -2.0f, 10.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(1.0f, 0.0f) }, //1
+		{ glm::vec3(10.8f, -2.0f, -10.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(1.0f, 1.0f) },
+		{ glm::vec3(-10.8f, -2.0f, -10.9f), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec2(0.0f, 1.0f) }
 	};
 	//Indices para dibujar el plano
 	GLuint indices[] = {
@@ -230,7 +230,7 @@ void GLApplication::applicationLoop() {
 
 	GLfloat angulos[] = {
 		0.0f,
-		90.0f,
+		0.0f,
 		180.0f,
 		90.0f,
 		0.0f
@@ -262,6 +262,8 @@ void GLApplication::applicationLoop() {
 	
 	SBB sbb = getSBB(objModel.getMeshes());
 	AABB aabb2 = getAABB(objModel2.getMeshes());
+	std::cout << "AABB.min.x: " << aabb2.min.x << std::endl;
+	std::cout << "AABB.min.y: "<< aabb2.min.y << std::endl;
 	SBB sbb2 = getSBB(objModel2.getMeshes());
 	SBB sbb3 = getSBB(objModel3.getMeshes());
 	SBB sbb4 = getSBB(objModel4.getMeshes());
@@ -384,82 +386,84 @@ void GLApplication::applicationLoop() {
 		glUniformMatrix4fv(viewLoc2, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc2, 1, GL_FALSE, glm::value_ptr(projection));
 		
-		for (int i = 0; i < 5; i++){
-			glm::mat4 model2;
-			model2 = glm::translate(model2, modelPositions[i]);
-			model2 = glm::scale(model2, scales[i]);
-			model2 = glm::rotate(model2, angulos[i], glm::vec3(0.0f, 1.0f, 0.0f));
-			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-			if (i == 0){
-				//texturas
-				textureRobot.bind(GL_TEXTURE0);
-				model2 = glm::translate(model2, windowManager->inputManager.getCharacterPosition());
-				model2 = glm::rotate(model2, windowManager->inputManager.getCharacterRotation(), glm::vec3(0.0f, 1.0f, 0.0f));
-				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-				objModel.render(&shader3);
+		//CARGA DE MODELOS Y DIBUJADO DE AABB Y SBB´s
 
-				model2 = glm::translate(model2,
-					glm::vec3(sbb.center.x, sbb.center.y, sbb.center.z));
-				model2 = glm::scale(model2,
-					glm::vec3(sbb.ratio, sbb.ratio, sbb.ratio));
-				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-				sphere.render();
+		/*###################  Personaje principal: ROBOT #########################*/
+			glm::mat4 modelRobot;
+			modelRobot = glm::translate(modelRobot, modelPositions[0]);
+			modelRobot = glm::scale(modelRobot, scales[0]);
+			modelRobot = glm::rotate(modelRobot, angulos[0], glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelRobot));
+			textureRobot.bind(GL_TEXTURE0);//Le aplicamos su textura
+			modelRobot = glm::translate(modelRobot, windowManager->inputManager.getCharacterPosition());
+			modelRobot = glm::rotate(modelRobot, windowManager->inputManager.getCharacterRotation(), glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelRobot));
+			objModel.render(&shader3);//lo renderizamos
+			//creacion de su sbb
+			modelRobot = glm::translate(modelRobot, glm::vec3(sbb.center.x, sbb.center.y, sbb.center.z));
+			modelRobot = glm::scale(modelRobot, glm::vec3(sbb.ratio, sbb.ratio, sbb.ratio));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelRobot));
+			sphere.render();
 				
+			/*###################  COCODRILO  ######################*/
+			glm::mat4 modelCroc;
+			modelCroc = glm::translate(modelCroc, modelPositions[1]);
+			modelCroc = glm::scale(modelCroc, scales[1]);
+			modelCroc = glm::rotate(modelCroc, angulos[1], glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelCroc));
+			texCroc.bind(GL_TEXTURE0);//Le aplicamos su textura
+			objModel2.render(&shader3);
+			//creacion de su AABB
+			modelCroc = glm::translate(modelCroc, aabb2.center);
+			modelCroc = glm::scale(modelCroc, glm::vec3(aabb2.dist / 2, aabb2.dist / 2, aabb2.dist / 2));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelCroc));
+			cubo.loadCube();
+			cubo.renderCube();
 
-			}
-			else if (i == 1){
-				//texturas
-				texCroc.bind(GL_TEXTURE0);
-				objModel2.render(&shader3);
+			/*##################  TREX ###############################*/
+			glm::mat4 modelTrex;
+			modelTrex = glm::translate(modelTrex, modelPositions[2]);
+			modelTrex = glm::scale(modelTrex, scales[2]);
+			modelTrex = glm::rotate(modelTrex, angulos[2], glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelTrex));
+			textrex.bind(GL_TEXTURE0);//asignamos su textura
+			objModel3.render(&shader3);
+			//creacion de su sbb
+			modelTrex = glm::translate(modelTrex, glm::vec3(sbb3.center.x, sbb3.center.y, sbb3.center.z));
+			modelTrex = glm::scale(modelTrex, glm::vec3(sbb3.ratio, sbb3.ratio, sbb3.ratio));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelTrex));
+			sphere.render();
 
-				model2 = glm::translate(model2, aabb2.center);
-					//glm::vec3(sbb2.center.x, sbb2.center.y, sbb2.center.z));
-				
-				model2 = glm::scale(model2, glm::vec3(5.0f,5.0f,5.0f));
-					//glm::vec3(sbb2.ratio,sbb2.ratio,sbb2.ratio));
-				//aabb2.dist, aabb2.dist, aabb2.dist
-				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-				//sphere.render();
-				cubo.loadCube(aabb2);
-				cubo.renderCube();
-			}
-			else if (i == 2){
-				textrex.bind(GL_TEXTURE0);
-				objModel3.render(&shader3);
+			/*######################  PUMPKIN ###########################*/
+			glm::mat4 modelPumpkin;
+			modelPumpkin = glm::translate(modelPumpkin, modelPositions[3]);
+			modelPumpkin = glm::scale(modelPumpkin, scales[3]);
+			modelPumpkin = glm::rotate(modelPumpkin, angulos[3], glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelPumpkin));
+			texpump.bind(GL_TEXTURE0);//asignamos la textura
+			objModel4.render(&shader3);
+			modelPumpkin = glm::translate(modelPumpkin, glm::vec3(sbb4.center.x, sbb4.center.y, sbb4.center.z));
+			modelPumpkin = glm::scale(modelPumpkin, glm::vec3(sbb4.ratio, sbb4.ratio, sbb4.ratio));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelPumpkin));
+			sphere.render();
 
-				model2 = glm::translate(model2,
-					glm::vec3(sbb3.center.x, sbb3.center.y, sbb3.center.z));
-				model2 = glm::scale(model2,
-					glm::vec3(sbb3.ratio, sbb3.ratio, sbb3.ratio));
-				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-				sphere.render();
+			/*############################ BAYMAX ######################################*/
+			glm::mat4 modelBaymax;
+			modelBaymax = glm::translate(modelBaymax, modelPositions[4]);
+			modelBaymax = glm::scale(modelBaymax, scales[4]);
+			modelBaymax = glm::rotate(modelBaymax, angulos[4], glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelBaymax));
+			texbaymax.bind(GL_TEXTURE0);//asignamos la textura
+			objModel5.render(&shader3);	
+			//creacion de sbb
+			modelBaymax = glm::translate(modelBaymax,glm::vec3(sbb5.center.x, sbb5.center.y, sbb5.center.z));
+			modelBaymax = glm::scale(modelBaymax,glm::vec3(sbb5.ratio, sbb5.ratio, sbb5.ratio));
+			glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(modelBaymax));
+			sphere.render();
+			
 
-
-			}
-			else if (i == 3){
-				texpump.bind(GL_TEXTURE0);
-				objModel4.render(&shader3);
-
-				model2 = glm::translate(model2,
-					glm::vec3(sbb4.center.x, sbb4.center.y, sbb4.center.z));
-				model2 = glm::scale(model2,
-					glm::vec3(sbb4.ratio, sbb4.ratio, sbb4.ratio));
-				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-				sphere.render();
-
-			}
-			else if (i == 4){
-				texbaymax.bind(GL_TEXTURE0);
-				objModel5.render(&shader3);
-				
-				model2 = glm::translate(model2,
-					glm::vec3(sbb5.center.x, sbb5.center.y, sbb5.center.z));
-				model2 = glm::scale(model2,
-					glm::vec3(sbb5.ratio, sbb5.ratio, sbb5.ratio));
-				glUniformMatrix4fv(modelLoc2, 1, GL_FALSE, glm::value_ptr(model2));
-				sphere.render();
-			}
-			SBB s1, s2;
+			/*PRUEBAS DE COLISIONES*/
+			/*SBB s1, s2;
 			s1.center = glm::vec3(model2* glm::vec4(0, 0, 0, 1));
 			s1.ratio = sbb.ratio *0.2f;
 			s2.center = glm::vec3(model2*glm::vec4(0, 0, 0, 1));
@@ -472,8 +476,8 @@ void GLApplication::applicationLoop() {
 				std::cout << "colision!!:" << colision << std::endl;
 				colision = false;
 
-			}
-		}
+			}*/
+		
 		
 
 		//Apagamos el shader

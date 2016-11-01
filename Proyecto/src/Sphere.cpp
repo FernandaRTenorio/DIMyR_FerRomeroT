@@ -109,78 +109,77 @@ void Sphere::init_para_sbb(){
 	}
 }
 
-void Sphere::loadCube(AABB aabb){
+void Sphere::loadCube(){
 	vertex2.resize(8);
-	index.resize(36);
+	index2.resize(36);
+
 	vertex2[0].position = glm::vec3(-0.5f, -0.5f, 0.5f);
-		//glm::vec3(aabb.min.x, aabb.min.y, aabb.min.z);
 	vertex2[0].color = glm::vec3(0.0f,1.0f,0.0f);
+
 	vertex2[1].position = glm::vec3(0.5f, -0.5f, 0.5f);
-		//glm::vec3(aabb.max.x, aabb.min.y, aabb.min.z);
 	vertex2[1].color = glm::vec3(0.0f, 1.0f, 0.0f);
+
 	vertex2[2].position = glm::vec3(0.5f, 0.5f, 0.5f);
-		//glm::vec3(aabb.max.x, aabb.max.y, aabb.min.z);
 	vertex2[2].color = glm::vec3(0.0f, 1.0f, 0.0f);
+
 	vertex2[3].position = glm::vec3(-0.5f, 0.5f, 0.5f);
-		//glm::vec3(aabb.min.x, aabb.max.y, aabb.min.z);
 	vertex2[3].color = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	vertex2[4].position = glm::vec3(-0.5f, -0.5f, -0.5f);
-		//glm::vec3(aabb.min.x, aabb.min.y, aabb.max.z);
 	vertex2[4].color = glm::vec3(0.0f, 1.0f, 0.0f);
-	vertex2[5].position = glm::vec3(0.5f, -0.5f, -0.5f);
-		//glm::vec3(aabb.max.x, aabb.min.y, aabb.max.z);
+
+	vertex2[5].position = glm::vec3(-0.5f, 0.5f, -0.5f);
 	vertex2[5].color = glm::vec3(0.0f, 1.0f, 0.0f);
+
 	vertex2[6].position = glm::vec3(0.5f, 0.5f, -0.5f);
-		//glm::vec3(aabb.max.x, aabb.max.y, aabb.max.z);
 	vertex2[6].color = glm::vec3(0.0f, 1.0f, 0.0f);
-	vertex2[7].position = glm::vec3(-0.5f, 0.5f, -0.5f);
-		//glm::vec3(aabb.min.x, aabb.max.y, aabb.max.z);
+
+	vertex2[7].position = glm::vec3(0.5f, -0.5f, -0.5f);
 	vertex2[7].color = glm::vec3(0.0f, 1.0f, 0.0f);
 
 	
 	//frontal
-	index[0] = 0;
-	index[1] = 1;
-	index[2] = 3;
-	index[3] = 1;
-	index[4] = 2;
-	index[5] = 3;
+	index2[0] = 0;
+	index2[1] = 1;
+	index2[2] = 2;
+	index2[3] = 2;
+	index2[4] = 3;
+	index2[5] = 0;
 	//derecha
-	index[6] = 5;
-	index[7] = 4;
-	index[8] = 1;
-	index[9] = 0;
-	index[10] = 5;
-	index[11] = 1;
+	index2[6] = 1;
+	index2[7] = 7;
+	index2[8] = 6;
+	index2[9] = 6;
+	index2[10] = 2;
+	index2[11] = 1;
 	//izquierda
-	index[12] = 3;
-	index[13] = 2;
-	index[14] = 7;
-	index[15] = 7;
-	index[16] = 6;
-	index[17] = 3;
+	index2[12] = 0;
+	index2[13] = 3;
+	index2[14] = 5;
+	index2[15] = 5;
+	index2[16] = 4;
+	index2[17] = 0;
 	//trasera
-	index[18] = 7;
-	index[19] = 4;
-	index[20] = 5;
-	index[21] = 6;
-	index[22] = 7;
-	index[23] = 5;
+	index2[18] = 4;
+	index2[19] = 5;
+	index2[20] = 6;
+	index2[21] = 6;
+	index2[22] = 7;
+	index2[23] = 4;
 	//superior
-	index[24] = 6;
-	index[25] = 5;
-	index[26] = 0;
-	index[27] = 3;
-	index[28] = 6;
-	index[29] = 0;
+	index2[24] = 3;
+	index2[25] = 2;
+	index2[26] = 6;
+	index2[27] = 6;
+	index2[28] = 5;
+	index2[29] = 3;
 	//inferior
-	index[30] = 7;
-	index[31] = 1;
-	index[32] = 4;
-	index[33] = 1;
-	index[34] = 7;
-	index[35] = 2;
+	index2[30] = 0;
+	index2[31] = 4;
+	index2[32] = 7;
+	index2[33] = 7;
+	index2[34] = 1;
+	index2[35] = 0;
 
 
 	glGenVertexArrays(1, &VAO);
@@ -303,7 +302,7 @@ void Sphere::renderCube(){
 
 	glBindVertexArray(VAO);
 	glEnable(GL_CULL_FACE);
-	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+	glDrawElements(GL_LINES, 36, GL_UNSIGNED_INT, 0);
 	glDisable(GL_CULL_FACE);
 	glBindVertexArray(0);
 }

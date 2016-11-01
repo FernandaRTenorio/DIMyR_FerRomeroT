@@ -109,12 +109,12 @@ void InputManager::do_movement(float deltaTime) {
 	// Calculate pitch
 	if (mouseButtomState[MouseButtonIndex::RIGHT])
 		pitch -= deltay * cameraSpeed;
-	std::cout << "pitch:" << pitch << std::endl;
+	//std::cout << "pitch:" << pitch << std::endl;
 
 	// Calculate Angle Arround
 	if (mouseButtomState[MouseButtonIndex::LEFT])
 		angleAroundPlayer -= deltax * cameraSpeed;
-	std::cout << "angleAroundPlayer:" << angleAroundPlayer << std::endl;
+	//std::cout << "angleAroundPlayer:" << angleAroundPlayer << std::endl;
 
 	//Calculate Horizontal distance
 	float horizontalDistance = distanceFromPlayer

@@ -22,7 +22,7 @@ public:
 	void init_para_sbb();
 	void load();
 	void load_sbb();
-	void loadCube(AABB aabb);
+	void loadCube();
 	void render();
 	void render2();
 	void renderCube();
