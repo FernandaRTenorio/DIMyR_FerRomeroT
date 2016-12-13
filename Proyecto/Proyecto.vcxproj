@@ -12,10 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Headers\CameraFPS.h" />
+    <ClInclude Include="src\Headers\Cubo.h" />
     <ClInclude Include="src\Headers\definition.h" />
     <ClInclude Include="src\Headers\GLApplication.h" />
     <ClInclude Include="src\Headers\GLFWManager.h" />
-    <ClInclude Include="src\Headers\Header.h" />
+    <ClInclude Include="src\Headers\collision.h" />
     <ClInclude Include="src\Headers\InputManager.h" />
     <ClInclude Include="src\Headers\Mesh.h" />
     <ClInclude Include="src\Headers\Model.h" />
@@ -26,6 +27,7 @@
     <ClInclude Include="src\Headers\WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Cubo.cpp" />
     <ClCompile Include="src\GLApplication.cpp" />
     <ClCompile Include="src\GLFWManager.cpp" />
     <ClCompile Include="src\InputManager.cpp" />
@@ -87,7 +89,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;glu32.lib;assimpd.lib;FreeImaged.lib;freetype.lib;AntTweakBar.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;CEGUICoreWindowRendererSet_d.lib;CEGUISILLYImageCodec_d.lib;CEGUIExpatParser_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;glu32.lib;assimpd.lib;FreeImaged.lib;freetype.lib;AntTweakBar.lib;CEGUIBase-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;CEGUICoreWindowRendererSet_d.lib;CEGUISILLYImageCodec_d.lib;CEGUIExpatParser_d.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../../external/glew-1.10.0-win32/glew-1.10.0/lib/Release/Win32;../../external/glfw-3.1.bin.WIN32/lib-vc2012;../../external/assimp-3.1.1/build/code/Debug;../../external/FreeImage3170/FreeImage/Dist/x32;../../external/freetype-2.3.5-1-bin/lib;../../external/AntTweakBar/lib;../../external/cegui-0.8.7/build/lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>

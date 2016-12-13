@@ -11,6 +11,15 @@
 #include <glm/glm.hpp>
 #include <GL/glew.h>
 
+
+class Colision {
+public:
+	static bool contactp1;
+	static bool contactp2;
+	static bool contactp3;
+	static bool npc4go;
+};
+
 typedef struct _VertexColor {
 
 	_VertexColor() {
@@ -78,5 +87,8 @@ enum MODEL_MODE {
 	VERTEX_LIGHT_COLOR,
 	VERTEX_LIGHT_TEXTURE
 };
+
+
+
 
 #endif /* HEADERS_DEFINITION_H_ */

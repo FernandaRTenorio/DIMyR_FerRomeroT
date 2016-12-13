@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DA34FD0A-EA5F-436C-B6B6-5E8BD265270A}</ProjectGuid>
+    <RootNamespace>PruebaAnimacion</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\OPENGL TUT7\GRAPHICS.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\INPUT.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\MAIN.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\MD5ANIM.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\MD5MODEL.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\OPENGL.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\SHADER.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\SYSTEM.cpp" />
+    <ClCompile Include="..\OPENGL TUT7\TEXTURE.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\external\glext\include\gl\glcorearb.h" />
+    <ClInclude Include="..\..\external\glext\include\gl\glext.h" />
+    <ClInclude Include="..\..\external\glext\include\gl\wglext.h" />
+    <ClInclude Include="..\OPENGL TUT7\GRAPHICS.h" />
+    <ClInclude Include="..\OPENGL TUT7\HELPERS.h" />
+    <ClInclude Include="..\OPENGL TUT7\INPUT.h" />
+    <ClInclude Include="..\OPENGL TUT7\MD5ANIM.h" />
+    <ClInclude Include="..\OPENGL TUT7\MD5MODEL.h" />
+    <ClInclude Include="..\OPENGL TUT7\OPENGL.h" />
+    <ClInclude Include="..\OPENGL TUT7\SHADER.h" />
+    <ClInclude Include="..\OPENGL TUT7\SYSTEM.h" />
+    <ClInclude Include="..\OPENGL TUT7\TEXTURE.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\OPENGL TUT7\FragmentShader.glsl" />
+    <None Include="..\OPENGL TUT7\VertexShader.glsl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

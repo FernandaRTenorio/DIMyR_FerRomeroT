@@ -51,7 +51,10 @@
     <ClInclude Include="src\Headers\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Headers\Header.h">
+    <ClInclude Include="src\Headers\Cubo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Headers\collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -84,6 +87,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cubo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

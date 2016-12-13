@@ -109,108 +109,7 @@ void Sphere::init_para_sbb(){
 	}
 }
 
-void Sphere::loadCube(){
-	vertex2.resize(8);
-	index2.resize(36);
 
-	vertex2[0].position = glm::vec3(-0.5f, -0.5f, 0.5f);
-	vertex2[0].color = glm::vec3(0.0f,1.0f,0.0f);
-
-	vertex2[1].position = glm::vec3(0.5f, -0.5f, 0.5f);
-	vertex2[1].color = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	vertex2[2].position = glm::vec3(0.5f, 0.5f, 0.5f);
-	vertex2[2].color = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	vertex2[3].position = glm::vec3(-0.5f, 0.5f, 0.5f);
-	vertex2[3].color = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	vertex2[4].position = glm::vec3(-0.5f, -0.5f, -0.5f);
-	vertex2[4].color = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	vertex2[5].position = glm::vec3(-0.5f, 0.5f, -0.5f);
-	vertex2[5].color = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	vertex2[6].position = glm::vec3(0.5f, 0.5f, -0.5f);
-	vertex2[6].color = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	vertex2[7].position = glm::vec3(0.5f, -0.5f, -0.5f);
-	vertex2[7].color = glm::vec3(0.0f, 1.0f, 0.0f);
-
-	
-	//frontal
-	index2[0] = 0;
-	index2[1] = 1;
-	index2[2] = 2;
-	index2[3] = 2;
-	index2[4] = 3;
-	index2[5] = 0;
-	//derecha
-	index2[6] = 1;
-	index2[7] = 7;
-	index2[8] = 6;
-	index2[9] = 6;
-	index2[10] = 2;
-	index2[11] = 1;
-	//izquierda
-	index2[12] = 0;
-	index2[13] = 3;
-	index2[14] = 5;
-	index2[15] = 5;
-	index2[16] = 4;
-	index2[17] = 0;
-	//trasera
-	index2[18] = 4;
-	index2[19] = 5;
-	index2[20] = 6;
-	index2[21] = 6;
-	index2[22] = 7;
-	index2[23] = 4;
-	//superior
-	index2[24] = 3;
-	index2[25] = 2;
-	index2[26] = 6;
-	index2[27] = 6;
-	index2[28] = 5;
-	index2[29] = 3;
-	//inferior
-	index2[30] = 0;
-	index2[31] = 4;
-	index2[32] = 7;
-	index2[33] = 7;
-	index2[34] = 1;
-	index2[35] = 0;
-
-
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertex2.size() * ((sizeof(glm::vec3) * 2) + sizeof(glm::vec2)),
-		vertex2.data(),
-		GL_STATIC_DRAW);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, index2.size() * sizeof(GLuint),
-		index2.data(),
-		GL_STATIC_DRAW);
-
-	// Position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex2[0]),
-		(GLvoid*)0);
-	glEnableVertexAttribArray(0);
-	// Color attribute
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertex2[0]),
-		(GLvoid*) sizeof(vertex2[0].position));
-	glEnableVertexAttribArray(1);
-
-	glBindVertexArray(0); // Unbind VAO
-
-
-}
 
 
 void Sphere::load() {
@@ -297,12 +196,4 @@ void Sphere::render2() {
 
 }
 
-void Sphere::renderCube(){
-	
 
-	glBindVertexArray(VAO);
-	glEnable(GL_CULL_FACE);
-	glDrawElements(GL_LINES, 36, GL_UNSIGNED_INT, 0);
-	glDisable(GL_CULL_FACE);
-	glBindVertexArray(0);
-}

@@ -8,7 +8,7 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-//#include "CameraFPS.h"
+#include "CameraFPS.h"
 
 // Standar GLFW for the management of inputs codes keyboards
 enum InputCodes {
@@ -84,9 +84,7 @@ class InputManager {
 public:
 
 	InputManager() :
-			lastMousePos(glm::ivec2(0.0)), deltax(0), deltay(0), scrollYoffset(
-			0), cameraPos(glm::vec3(0.0f, 0.0f, 3.0f)), yaw(0), pitch(
-			20), roll(0), distanceFromPlayer(5), angleAroundPlayer(0) {
+			lastMousePos(glm::ivec2(0.0)), camera(nullptr){
 		mouseButtomState = new bool[3];
 		keyState = new bool[1024];
 		for (int i = 0; i < 3; i++)
@@ -119,11 +117,24 @@ public:
 		return keyState;
 	}
 
-	glm::vec3  getCameraPos() {
+	/*glm::vec3  getCameraPos() {
 		return cameraPos;
+	}*/
+	CameraFPS* getCamera(){
+		return camera;
+	}
+	void setCamera(CameraFPS* camera) {
+		this->camera = camera;
 	}
 
-	float getPitch() const{
+	bool isGenerateRay() {
+		return generateRay;
+	}
+
+	void setGenerateRay(bool generateRay) {
+		this->generateRay = generateRay;
+	}
+	/*float getPitch() const{
 		return pitch;
 	}
 
@@ -143,37 +154,31 @@ public:
 		return CharacterPosition;
 	}
 
-	glm::vec3 setCharacterPosition(bool colision){
+	void setCharacterPosition(bool colision){
 		CharacterPosition = CharacterPosition;
 		colision2 = colision;
-		return CharacterPosition;
+		
 	}
 	float getCharacterRotation(){
 		return CharacterRotation;
 	}
+	float getTraslado(){
+		return trasladar;
+	}
+	void setTraslado(bool t){
+		trasladar = t;
+	}*/
 	/*void setCamera(CameraFPS* camera) {
 		this->camera = camera;
 	}*/
+	
 
 protected:
 	glm::ivec2 lastMousePos;
-	float deltax;
-	float deltay;
-	float scrollYoffset;
 	bool * mouseButtomState;
 	bool * keyState;
-	
-	glm::vec3 cameraPos;
-	float yaw;
-	float pitch;
-	float roll;
-
-	float distanceFromPlayer;
-	float angleAroundPlayer;
-
-	glm::vec3 CharacterPosition;
-	float CharacterRotation;
-	bool colision2;
+	CameraFPS * camera;
+	bool generateRay;
 	
 };
 

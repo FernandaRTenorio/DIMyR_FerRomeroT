@@ -24,6 +24,8 @@ InputCodes InputManager::toApplicationKey(int key) {
 		return InputCodes::Left;
 	case 262:
 		return InputCodes::Right;
+	case 67:
+		return InputCodes::C;
 	}
 }
 
@@ -52,34 +54,35 @@ void InputManager::keyPressed(InputCodes code, float deltaTime, State state) {
 }
 
 void InputManager::mouseMoved(float mouseX, float mouseY) {
-	if (mouseButtomState[MouseButtonIndex::LEFT]||mouseButtomState[MouseButtonIndex::RIGHT]) {
+	if (mouseButtomState[MouseButtonIndex::LEFT]) {
 		
-		deltax = mouseX - lastMousePos.x;
-		deltay = mouseY - lastMousePos.y;
+		float xoffset = mouseX - lastMousePos.x;
+		float yoffset = lastMousePos.y - mouseY;
+		camera->ProcessMouseMovement(xoffset, yoffset);
 		
-	}
-	else{
-		deltax = 0;
-		deltay = 0;
 	}
 	lastMousePos.x = mouseX;
 	lastMousePos.y = mouseY;
+	
+	
 }
 
 void InputManager::mouseClicked(MouseButtonIndex code, float mouseX,
 		float mouseY, State state) {
-	mouseButtomState[code] = state;
+	//mouseButtomState[code] = state;
 	switch (code) {
 	case RIGHT:
 		std::cout << "lastMousePos.x:" << lastMousePos.x << std::endl;
-		lastMousePos.x = mouseX;
-		lastMousePos.y = mouseY;
+		//lastMousePos.x = mouseX;
+		//lastMousePos.y = mouseY;
+		generateRay = true;
 		break;
 	case LEFT:
 		std::cout << "lastMousePos.y:" << lastMousePos.y << std::endl;
 		lastMousePos.x = mouseX;
 		lastMousePos.y = mouseY;
-		//mouseButtomState[code] = state;
+		
+		mouseButtomState[code] = state;
 		break;
 	case MIDDLE:
 		//std::cout << "lastMousePos.x:" << lastMousePos.x << std::endl;
@@ -89,16 +92,16 @@ void InputManager::mouseClicked(MouseButtonIndex code, float mouseX,
 }
 
 void InputManager::mouseScroll(float yoffset) {
-	scrollYoffset = yoffset;
+	camera->ProcessScroll(yoffset);
 }
 
 void InputManager::do_movement(float deltaTime) {
 
 	
-
+	
 
 	/*Controles de la camara*/
-	float cameraSpeed = 50.0f * deltaTime;
+	/*float cameraSpeed = 50.0f * deltaTime;
 	glm::vec3 camera_look_at = glm::vec3(0.0f, 1.0f, 0.0f);
 		//glm::vec3(CharacterPosition.x, CharacterPosition.y, CharacterPosition.z);
 
@@ -155,9 +158,13 @@ void InputManager::do_movement(float deltaTime) {
 		|| keyState[InputCodes::Down]){
 		//cameraPos -= cameraSpeed * cameraFront;
 		if (colision2){
+			//std::cout << "en input colision vale :" << colision2 << std::endl;
 			CharacterPosition = CharacterPosition;
+			
 		}
 		else{
+			//std::cout << "entro al else y colision vale:"  << colision2 <<	std::endl;
+			
 			CharacterPosition.z -= cameraSpeed * cos(CharacterRotation);
 			CharacterPosition.x -= cameraSpeed * sin(CharacterRotation);
 		}
@@ -167,16 +174,42 @@ void InputManager::do_movement(float deltaTime) {
 	}
 	if (keyState[InputCodes::A] || keyState[InputCodes::a]
 		|| keyState[InputCodes::Left])
+		*/
 		/*cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp))
 		* cameraSpeed;*/
 		
-		CharacterRotation += deltaTime * cameraSpeed;
+		/*CharacterRotation += deltaTime * cameraSpeed;
 		//distanceFromPlayer * glm::cos(glm::radians(pitch));
 		//angleAroundPlayer += CharacterRotation;
 	if (keyState[InputCodes::D] || keyState[InputCodes::d]
-		|| keyState[InputCodes::Right])
+		|| keyState[InputCodes::Right]){*/
 		/*cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp))
 		* cameraSpeed;*/
+		/*std::cout << "tecla presionada" << std::endl;
 		CharacterRotation -= deltaTime  *cameraSpeed;
 		//distanceFromPlayer * (glm::cos(glm::radians(pitch)));
+	}
+	if (keyState[InputCodes::C] || keyState[InputCodes::c]|| keyState[InputCodes::Space]){
+		std::cout << "tecla presionada" << std::endl;
+		trasladar = true;
+	}
+	else{
+		trasladar = false;
+	}*/
+	if (keyState[InputCodes::W] || keyState[InputCodes::w] || keyState[InputCodes::Up])
+	camera->ProcessKeyboard2(C_FORWARD, deltaTime);
+	if (keyState[InputCodes::X] || keyState[InputCodes::x] || keyState[InputCodes::Down])
+	camera->ProcessKeyboard2(C_BACKWARD, deltaTime);
+	if (keyState[InputCodes::A] || keyState[InputCodes::a] || keyState[InputCodes::Left])
+	camera->ProcessKeyboard2(C_LEFT, deltaTime);
+	if (keyState[InputCodes::D] || keyState[InputCodes::d] || keyState[InputCodes::Right])
+	camera->ProcessKeyboard2(C_RIGHT, deltaTime);
+	if (keyState[InputCodes::S] || keyState[InputCodes::s])
+	camera->ProcessKeyboard2(C_RESTART, deltaTime);
+	if (keyState[InputCodes::R] || keyState[InputCodes::r])
+	camera->ProcessKeyboard2(C_caja_caja, deltaTime);
+	else{
+		camera->ProcessKeyboard2(C_CajaR, deltaTime);
+	}
+	
 }
